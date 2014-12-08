@@ -62,12 +62,6 @@ mv composer.phar /usr/local/bin/composer
 
 printf "\nPATH=\"/home/vagrant/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/vagrant/.profile
 
-# Install Laravel Envoy
-
-sudo su vagrant <<'EOF'
-/usr/local/bin/composer global require "laravel/envoy=~1.0"
-EOF
-
 # Set Some PHP CLI Settings
 
 sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/cli/php.ini
