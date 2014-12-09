@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
 
 # Update Package List
-
 apt-get update
-
 apt-get upgrade -y
 
-# Install Some PPAs
+# Install Dotdeb main repo and php repo
+cat > /etc/apt/sources.list.d/dotdeb.list << EOF
+# Dotdeb main repo
+deb http://packages.dotdeb.org wheezy all
+deb-src http://packages.dotdeb.org wheezy all
+# PHP 5.6 on Debian 7 "Wheezy"
+deb http://packages.dotdeb.org wheezy-php56 all
+deb-src http://packages.dotdeb.org wheezy-php56 all
+EOF
 
-apt-get install -y software-properties-common
-
-apt-add-repository ppa:nginx/stable -y
-apt-add-repository ppa:rwky/redis -y
-apt-add-repository ppa:chris-lea/node.js -y
-apt-add-repository ppa:ondrej/php5-5.6 -y
+# Fetch and install the Dotdeb GnuPG key
+wget http://www.dotdeb.org/dotdeb.gpg
+sudo apt-key add dotdeb.gpg
+rm dotdeb.gpg
 
 # Update Package Lists
-
 apt-get update
+
+exit
 
 # Install Some Basic Packages
 
